@@ -4,34 +4,14 @@ const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
 const { makeExecutableSchema, addMockFunctionsToSchema } = require("graphql-tools");
 const { graphql } = require("graphql");
 
+const schemaString = require('./schema');
+const mocks = require("./mocks");
+
 const app = express();
 
-const typeDefs = `
-  type Author {
-    id: Int!
-    firstName: String
-    lastName: String
-    posts: [Post] # the list of Posts by this author
-  }
-
-  type Post {
-    id: Int!
-    title: String
-    author: Author
-    votes: Int
-  }
-
-  type Query {
-    posts: [Post]
-    authors: [Author]
-    author(id: Int!): Author
-    post(id: Int!): Post
-  }
-`;
+const typeDefs = schemaString;
 
 const schema = makeExecutableSchema({ typeDefs });
-
-const mocks = {};
 
 addMockFunctionsToSchema({ schema, mocks });
 
