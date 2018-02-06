@@ -1,3 +1,16 @@
-const mocks = {};
+const casual = require('casual');
+// https://github.com/boo1ean/casual
+
+const mocks = {
+    Post: () => ({
+        id: casual.integer(from = 1, to = 1000),
+        title: casual.title
+    }),
+    Author: () => ({
+        id: casual.integer(from = 1, to = 1000),
+        firstName: casual.first_name,
+        lastName: casual.last_name
+    })
+};
 
 module.exports = mocks;
