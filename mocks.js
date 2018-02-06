@@ -2,17 +2,31 @@ const { MockList } = require('graphql-tools')
 const casual = require('casual');
 // https://github.com/boo1ean/casual
 
+casual.define('hours_list', () => {
+  return [
+    '09:00', '09:20', '09:40',
+    '12:00', '12:20', '12:40'
+  ];
+});
+
 const mocks = {
-  Post: () => ({
-    id: casual.integer((from = 1), (to = 1000)),
-    title: casual.title,
-    votes: casual.integer((from = 1), (to = 100))
+  Center: () => ({
+    name: casual.company_name
   }),
-  Author: () => ({
-    id: casual.integer((from = 1), (to = 1000)),
-    firstName: casual.first_name,
-    lastName: casual.last_name,
-    posts: () => new MockList([0, 3])
+  Service: () => ({
+    description: casual.words((n = 2))
+  }),
+  Professional: () => ({
+    fullName: casual.full_name,
+    cmp: casual.numerify("#####"),
+    description: casual.description
+  }),
+  Image: () => ({
+    url: 'http://lorempixel.com/400/400/people'
+  }),
+  Date: () => ({
+    day: casual.date((format = "YYYY-MM-DD")),
+    hours: casual.hours_list
   })
 };
 

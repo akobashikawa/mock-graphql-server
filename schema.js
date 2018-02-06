@@ -1,23 +1,42 @@
 const schemaString = `
-  type Author {
-    id: Int!
-    firstName: String
-    lastName: String
-    posts: [Post] # the list of Posts by this author
-  }
-
-  type Post {
-    id: Int!
-    title: String
-    author: Author
-    votes: Int
-  }
-
   type Query {
-    posts: [Post]
-    authors: [Author]
-    author(id: Int!): Author
-    post(id: Int!): Post
+    Centers: [Center]
   }
+
+  type Center {
+    id: Int!
+    name: String!
+    Services: [Service]
+  }
+
+  type Service {
+      id: Int!
+      description: String!
+      Professionals: [Professional]
+  }
+
+  type Professional {
+      id: Int!
+      fullName: String
+      description: String
+      cmp: String
+      image: [Image]
+      Availables: [Availables]
+  }
+
+  type Image {
+      url: String
+  }
+
+  type Availables {
+      id: Int!
+      Dates: [Date]
+  }
+
+  type Date {
+      day: String
+      hours: [String]
+  }
+  
 `;
 module.exports = schemaString;
