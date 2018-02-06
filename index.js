@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
 const { makeExecutableSchema, addMockFunctionsToSchema } = require("graphql-tools");
-const { graphql } = require("graphql");
 
 const schemaString = require('./schema');
 const mocks = require("./mocks");
