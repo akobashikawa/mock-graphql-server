@@ -1,6 +1,7 @@
 const { MockList } = require('graphql-tools')
 const casual = require('casual');
 // https://github.com/boo1ean/casual
+const moment = require('moment');
 
 casual.define('hours_list', () => {
   return [
@@ -9,12 +10,21 @@ casual.define('hours_list', () => {
   ];
 });
 
+casual.define('future_day', () => {
+  const n = casual.integer(from=10, to=30);
+  return moment()
+    .add(n, "days")
+    .format("YYYY-MM-DD");
+});
+
 const mocks = {
   Center: () => ({
-    name: casual.company_name
+    name: casual.company_name,
+    services: () => new MockList(10) 
   }),
   Service: () => ({
-    description: casual.words((n = 2))
+    description: casual.words((n = 2)),
+    professionals: () => new MockList([1, 4])
   }),
   Professional: () => ({
     fullName: casual.full_name,
@@ -25,7 +35,7 @@ const mocks = {
     url: 'http://lorempixel.com/400/400/people'
   }),
   Date: () => ({
-    day: casual.date((format = "YYYY-MM-DD")),
+    day: casual.future_day,
     hours: casual.hours_list
   })
 };
