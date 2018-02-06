@@ -1,3 +1,4 @@
+const { MockList } = require('graphql-tools')
 const casual = require('casual');
 // https://github.com/boo1ean/casual
 
@@ -10,7 +11,8 @@ const mocks = {
   Author: () => ({
     id: casual.integer((from = 1), (to = 1000)),
     firstName: casual.first_name,
-    lastName: casual.last_name
+    lastName: casual.last_name,
+    posts: () => new MockList([0, 3])
   })
 };
 
