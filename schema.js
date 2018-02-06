@@ -1,18 +1,22 @@
 const schemaString = `
   type Query {
-    Centers: [Center]
+    centers: [Center]
+    center(id: Int): Center
+    professional(id: Int): Professional
+    professionalByService(id: Int): [Professional]
   }
 
   type Center {
     id: Int!
     name: String!
-    Services: [Service]
+    services: [Service]
+    professionals: [Professional]
   }
 
   type Service {
       id: Int!
       description: String!
-      Professionals: [Professional]
+      professionals: [Professional]
   }
 
   type Professional {
@@ -21,7 +25,7 @@ const schemaString = `
       description: String
       cmp: String
       image: [Image]
-      Availables: [Availables]
+      availables: [Availables]
   }
 
   type Image {
@@ -30,7 +34,7 @@ const schemaString = `
 
   type Availables {
       id: Int!
-      Dates: [Date]
+      dates: [Date]
   }
 
   type Date {
