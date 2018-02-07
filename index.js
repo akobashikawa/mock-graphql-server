@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
 const { makeExecutableSchema, addMockFunctionsToSchema } = require("graphql-tools");
 
@@ -14,7 +15,10 @@ const schema = makeExecutableSchema({ typeDefs });
 
 addMockFunctionsToSchema({ schema, mocks });
 
-app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
+app.use("/graphql", 
+  cors(),
+  bodyParser.json(), 
+  graphqlExpress({ schema }));
 
 app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 
